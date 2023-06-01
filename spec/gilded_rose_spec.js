@@ -26,13 +26,75 @@ describe("Gilded Rose", function () {
         console.log(`${item.name}, ${item.sellIn}, ${item.quality}`)
       );
       gildedRose.updateQuality();
-      expect(items[0].name).toBe("+5 Dexterity Vest");
-      expect(items[0].sellIn).toBe(9);
-    	expect(items[0].quality).toBe(19);
-
     }
   });
 
+it("+5 Dexterity Vest should return", () => {
+  expect(items[0].name).toBe("+5 Dexterity Vest");
+  expect(items[0].sellIn).toBe(8);
+  expect(items[0].quality).toBe(18);
+});
+
+  it("Aged Brie should return", () => {
+    expect(items[1].name).toBe("Aged Brie");
+    expect(items[1].sellIn).toBe(0);
+    expect(items[1].quality).toBe(2);
+  });
+
+  it("Elixir of the Mongoose should return", () => {
+    expect(items[2].name).toBe("Elixir of the Mongoose");
+    expect(items[2].sellIn).toBe(3);
+    expect(items[2].quality).toBe(5);
+  });
+
+  it("Sulfuras, Hand of Ragnaros should return", () => {
+    expect(items[3].name).toBe("Sulfuras, Hand of Ragnaros");
+    expect(items[3].sellIn).toBe(0);
+    expect(items[3].quality).toBe(80);
+  });
+
+  it("Sulfuras, Hand of Ragnaros should amways return 80 quality", () => {
+    expect(items[4].name).toBe("Sulfuras, Hand of Ragnaros");
+    expect(items[4].sellIn).toBe(-1);
+    expect(items[4].quality).toBe(80);
+  });
+
+  it("Backstage passes to a TAFKAL80ETC concert should return", () => {
+    expect(items[5].name).toBe("Backstage passes to a TAFKAL80ETC concert");
+    expect(items[5].sellIn).toBe(13);
+    expect(items[5].quality).toBe(22);
+  });
+
+  it("Backstage passes to a TAFKAL80ETC concert should return", () => {
+    expect(items[6].name).toBe("Backstage passes to a TAFKAL80ETC concert");
+    expect(items[6].sellIn).toBe(8);
+    expect(items[6].quality).toBe(50);
+  });
+
+  it("Backstage passes to a TAFKAL80ETC concert should return", () => {
+    expect(items[7].name).toBe("Backstage passes to a TAFKAL80ETC concert");
+    expect(items[7].sellIn).toBe(3);
+    expect(items[7].quality).toBe(45);
+  });
+
+  it("Conjured Mana Cake should return", () => {
+    expect(items[8].name).toBe("Conjured Mana Cake");
+    expect(items[8].sellIn).toBe(1);
+    expect(items[8].quality).toBe(2);
+  });
+
+  it("Conjured Mana Cake should return", () => {
+    expect(items[9].name).toBe("Conjured Mana Cake");
+    expect(items[9].sellIn).toBe(8);
+    expect(items[9].quality).toBe(16);
+  });
+
+  it("Aged Brie should not return more than 50 quality", () => {
+    expect(items[10].name).toBe("Aged Brie");
+    expect(items[10].sellIn).toBe(38);
+    expect(items[10].quality).toBe(50);
+  });
+  
   it("should decrease sellIn and quality by 1 for normal items", function () {
     const gildedRose = new Shop([new Item("foo", 2, 3)]);
     const items = gildedRose.updateQuality();
