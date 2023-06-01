@@ -1,8 +1,10 @@
 const { Shop, Item } = require("../src/gilded_rose.js");
 
 describe("Gilded Rose", function () {
-  it("full test", () => {
-    const items = [
+  let items;
+
+  beforeEach(() => {
+    items = [
       new Item("+5 Dexterity Vest", 10, 20),
       new Item("Aged Brie", 2, 0),
       new Item("Elixir of the Mongoose", 5, 7),
@@ -11,9 +13,11 @@ describe("Gilded Rose", function () {
       new Item("Backstage passes to a TAFKAL80ETC concert", 15, 20),
       new Item("Backstage passes to a TAFKAL80ETC concert", 10, 49),
       new Item("Backstage passes to a TAFKAL80ETC concert", 5, 39),
-
-      // This Conjured item does not work properly yet
       new Item("Conjured Mana Cake", 3, 6),
+      new Item("Conjured Mana Cake", 10, 20),
+      new Item("Aged Brie", 40, 49),
+      new Item("Backstage passes to a TAFKAL80ETC concert", 5, 50),
+      new Item("Backstage passes to a TAFKAL80ETC concert", 0, 48),
     ];
 
     const days = Number(process.argv[2]) || 2;
@@ -29,11 +33,11 @@ describe("Gilded Rose", function () {
     }
   });
 
-it("+5 Dexterity Vest should return", () => {
-  expect(items[0].name).toBe("+5 Dexterity Vest");
-  expect(items[0].sellIn).toBe(8);
-  expect(items[0].quality).toBe(18);
-});
+  it("+5 Dexterity Vest should return", () => {
+    expect(items[0].name).toBe("+5 Dexterity Vest");
+    expect(items[0].sellIn).toBe(8);
+    expect(items[0].quality).toBe(18);
+  });
 
   it("Aged Brie should return", () => {
     expect(items[1].name).toBe("Aged Brie");
@@ -94,12 +98,17 @@ it("+5 Dexterity Vest should return", () => {
     expect(items[10].sellIn).toBe(38);
     expect(items[10].quality).toBe(50);
   });
-  
-  it("should decrease sellIn and quality by 1 for normal items", function () {
-    const gildedRose = new Shop([new Item("foo", 2, 3)]);
-    const items = gildedRose.updateQuality();
-    expect(items[0].name).toBe("foo");
-    expect(items[0].sellIn).toBe(1);
-    expect(items[0].quality).toBe(2);
+
+  it("Backstage passes to a TAFKAL80ETC concert should not return more than 50 quality", () => {
+    expect(items[11].name).toBe("Backstage passes to a TAFKAL80ETC concert");
+    expect(items[11].sellIn).toBe(3);
+    expect(items[11].quality).toBe(50);
   });
+
+  it("Backstage passes to a TAFKAL80ETC concert should return 0 quality when 0 day left", () => {
+    expect(items[12].name).toBe("Backstage passes to a TAFKAL80ETC concert");
+    expect(items[12].sellIn).toBe(-2);
+    expect(items[12].quality).toBe(0);
+  });
+
 });
